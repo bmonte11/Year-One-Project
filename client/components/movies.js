@@ -1,11 +1,36 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-export default class Movies extends React.Component {
+class AllMovies extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      input: ''
+    }
+  }
+
+  componentDidMount() {
+    this.props.fetchMovies()
+  }
+
+  myChangeHandler(event) {
+    this.setState({input: event.target.value})
+  }
+
   render() {
+    console.log(this.state.input)
     return (
       <div>
-        <h1>This is a page where you can search movies!</h1>
+        <h1>Here are all the movies</h1>
       </div>
     )
   }
 }
+
+const mapDispatch = dispatch => {
+  return {
+    getMovies: () => dispatch(fetchMovies())
+  }
+}
+
+export default connect(null, mapDispatch)(AllMovies)

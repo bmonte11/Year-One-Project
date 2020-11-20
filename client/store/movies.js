@@ -1,4 +1,5 @@
 import axios from 'axios'
+const URL = 'http://www.omdbapi.com/?i=tt3896198&apikey=35db4ef'
 
 const SET_MOVIES = 'SET_MOVIES'
 
@@ -9,8 +10,9 @@ export const setMovies = movies => {
 export function fetchMovies() {
   return async function(dispatch) {
     try {
-      const result = await axios.get('/api/movies')
+      const result = await axios.get(URL)
       dispatch(setMovies(result.data))
+      console.log(result, 'this is the result from the thunk')
     } catch (err) {
       console.error(err)
     }

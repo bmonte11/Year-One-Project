@@ -41,8 +41,12 @@ export default class Movies extends React.Component {
             Search
           </button>
           {this.state.clicked && (
-            <div className="movie info">
-              This is displaying if there's a movie
+            <div className="movie-info">
+              <div>{this.state.movie.Title}</div>
+              <div>{this.state.movie.Director}</div>
+              <div>{this.state.movie.Released}</div>
+              <div>{this.state.movie.Plot}</div>
+              <img src={this.state.movie.Poster} />
             </div>
           )}
         </form>

@@ -19,3 +19,14 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+img {
+  width: 50%;
+  height: 50%;
+}

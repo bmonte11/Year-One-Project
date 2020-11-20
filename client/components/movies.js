@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {fetchMovies} from '../store/movies'
 
 class AllMovies extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class AllMovies extends React.Component {
   }
 
   render() {
-    console.log(this.state.input)
+    console.log(this.props)
     return (
       <div>
         <h1>Here are all the movies</h1>

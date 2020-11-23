@@ -14,15 +14,6 @@ const options = {
   }
 }
 
-// const options = {
-//   method: 'GET',
-//   url: 'https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/',
-//   headers: {
-//     'x-rapidapi-key': 'fd7b15974cmsh8a07e9234699e3cp16b971jsnd504ba3dbbbb',
-//     'x-rapidapi-host': 'imdb-internet-movie-database-unofficial.p.rapidapi.com',
-//   },
-// }
-
 export default class Movies extends React.Component {
   constructor(props) {
     super(props)
@@ -41,7 +32,6 @@ export default class Movies extends React.Component {
   async onSubmit(event) {
     event.preventDefault()
     options.params = {Title: this.state.input, ProgramTypes: 'Movie'}
-    // options.url = `https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/${this.state.input}`
     let response = await axios.request(options)
     try {
       console.log(response.data, 'response in onSubmit')
@@ -49,14 +39,9 @@ export default class Movies extends React.Component {
     } catch (error) {
       console.log('error')
     }
-    // fetch(`http://www.omdbapi.com/?t=${this.state.input}&apikey=35db4ef`)
-    //   .then(resp => resp.json())
-    //   .then(data => this.setState({movie: data, clicked: true}))
-    // console.log(response, 'response in component did mount')
-    // this.props.history.push('/movies')
   }
   render() {
-    console.log(this.state.movie)
+    // console.log(this.props.match, 'props.match')
     const movies = this.state.movie.Hits
     return (
       <div>

@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const options = {
   method: 'GET',
-  url: 'https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/',
+  url: 'https://imdb-internet-movie-database-unofficial.p.rapidapi.com/film/',
   headers: {
     'x-rapidapi-key': 'fd7b15974cmsh8a07e9234699e3cp16b971jsnd504ba3dbbbb',
     'x-rapidapi-host': 'imdb-internet-movie-database-unofficial.p.rapidapi.com'
@@ -18,21 +18,28 @@ export default class SingleMovie extends React.Component {
     }
   }
   async componentDidMount() {
-    // options.url = `https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/${this.state.input}`
+    options.url = `https://imdb-internet-movie-database-unofficial.p.rapidapi.com/film/${
+      this.props.match.params.movie
+    }`
     let response = await axios.request(options)
     try {
-      console.log(response.data, 'response in onSubmit')
+      console.log(response.data, 'response in singleMovie component did mount')
       this.setState({movie: response.data})
     } catch (error) {
       console.log('error')
     }
   }
   render() {
-    console.log(this.state.movie, 'movie in the single Movie component')
-    return (
-      <div>
-        <h1>This is a single Movie page!</h1>
-      </div>
-    )
+    if (this.state.movie === {}) return <span>Loading...</span>
+    else
+      return (
+        <div>
+          <div className="header">
+            <h2>Title</h2>
+            {this.state.movie.title}
+            <img src={this.state.movie.poster} />
+          </div>
+        </div>
+      )
   }
 }

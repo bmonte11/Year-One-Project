@@ -1,9 +1,7 @@
-// const router = require('express').Router()
-// module.exports = router
+const router = require('express').Router()
+module.exports = router
 
-// const
-
-// router.get('', async (req, res, next) => {
+// router.get('/', async (req, res, next) => {
 //   try{
 
 //   } catch(err) {

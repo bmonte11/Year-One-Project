@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import MovieList from './listMovies'
 
 const options = {
   method: 'GET',
@@ -69,18 +70,7 @@ export default class Movies extends React.Component {
           <button type="submit" onClick={this.onSubmit}>
             Search
           </button>
-          {this.state.clicked &&
-            movies.map(movie => {
-              return (
-                <div className="movie-info" key={movie.id}>
-                  <div>{movie.Source.Title}</div>
-                  {/* <div>{movie.Source.Director}</div> */}
-                  <div>{movie.Source.Year}</div>
-                  {/* <div>{movie.Source.Plot}</div> */}
-                  {/* <img src={movie.Source.Poster} /> */}
-                </div>
-              )
-            })}
+          {this.state.clicked && <MovieList movies={movies} key={movies.id} />}
         </form>
       </div>
     )

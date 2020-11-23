@@ -13,6 +13,15 @@ const options = {
   }
 }
 
+// const options = {
+//   method: 'GET',
+//   url: 'https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/',
+//   headers: {
+//     'x-rapidapi-key': 'fd7b15974cmsh8a07e9234699e3cp16b971jsnd504ba3dbbbb',
+//     'x-rapidapi-host': 'imdb-internet-movie-database-unofficial.p.rapidapi.com',
+//   },
+// }
+
 export default class Movies extends React.Component {
   constructor(props) {
     super(props)
@@ -31,6 +40,7 @@ export default class Movies extends React.Component {
   async onSubmit(event) {
     event.preventDefault()
     options.params = {Title: this.state.input, ProgramTypes: 'Movie'}
+    // options.url = `https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/${this.state.input}`
     let response = await axios.request(options)
     try {
       console.log(response.data, 'response in onSubmit')

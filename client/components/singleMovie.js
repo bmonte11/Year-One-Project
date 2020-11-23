@@ -8,14 +8,7 @@ export default class SingleMovie extends React.Component {
     console.log()
     return (
       <div>
-        <h1>This is a page where you can search movies!</h1>
-        <form>
-          <input
-            type="text"
-            onChange={this.myChangeHandler}
-            value={this.state.input}
-          />
-        </form>
+        <h1>This is a single Movie page!</h1>
       </div>
     )
   }

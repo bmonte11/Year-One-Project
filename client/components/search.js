@@ -41,7 +41,6 @@ export default class Movies extends React.Component {
     }
   }
   render() {
-    // console.log(this.props.match, 'props.match')
     const movies = this.state.movie.Hits
     return (
       <div>

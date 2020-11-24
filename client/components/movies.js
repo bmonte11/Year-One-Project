@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchMovies} from '../store/movies'
+// import {fetchMovies} from '../store/movies'
 import axios from 'axios'
-const URL = 'http://www.omdbapi.com/?i=tt3896198&apikey=35db4ef&'
 
 class AllMovies extends React.Component {
   constructor(props) {
@@ -38,7 +37,7 @@ class AllMovies extends React.Component {
 
 const mapDispatch = dispatch => {
   return {
-    getMovies: () => dispatch(fetchMovies())
+    // getMovies: () => dispatch(fetchMovies())
   }
 }
 

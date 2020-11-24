@@ -16,6 +16,8 @@ export default class SingleMovie extends React.Component {
     this.state = {
       movie: {}
     }
+    this.onDownvote = this.onDownvote.bind(this)
+    this.onUpvote = this.onUpvote.bind(this)
   }
   async componentDidMount() {
     options.url = `https://imdb-internet-movie-database-unofficial.p.rapidapi.com/film/${
@@ -29,15 +31,27 @@ export default class SingleMovie extends React.Component {
       console.log('error')
     }
   }
+
   render() {
-    if (this.state.movie === {}) return <span>Loading...</span>
-    else
+    if (this.state.movie === {}) {
+      return (
+        <div>
+          <span>Loading...</span>
+        </div>
+      )
+    } else
       return (
         <div>
           <div className="header">
             <h2>Title</h2>
             {this.state.movie.title}
             <img src={this.state.movie.poster} />
+            <button type="button" onClick={this.onUpvote}>
+              Vote Up
+            </button>
+            <button type="button" onClick={this.onDownvote}>
+              Vote Down
+            </button>
           </div>
         </div>
       )

@@ -13,6 +13,9 @@ const Movie = db.define('movie', {
   releaseYear: {
     type: Sequelize.INTEGER
   },
+  description: {
+    type: Sequelize.TEXT
+  },
   thumbsUp: {
     type: Sequelize.INTEGER
   },

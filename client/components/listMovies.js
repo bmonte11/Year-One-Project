@@ -8,7 +8,7 @@ export default class MovieList extends React.Component {
     return movies.map(movie => {
       let destination = `/search/${movie.Source.Title}`
       return (
-        <div className="movie-info" key={movie.key}>
+        <div className="movie-info" key={movie.id}>
           <Link to={destination}>
             {' '}
             <div>{movie.Source.Title}</div>{' '}

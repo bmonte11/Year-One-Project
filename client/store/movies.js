@@ -1,15 +1,10 @@
 import axios from 'axios'
 
 const GET_MOVIE = 'GET_MOVIE'
-const ADD_MOVIE = 'ADD_MOVIE'
 const UPDATE_TALLY = 'UPDATE_TALLY'
 
 export const getMovie = movie => {
   return {type: GET_MOVIE, movie}
-}
-
-export const addMovie = movie => {
-  return {type: ADD_MOVIE, movie}
 }
 
 export const updateTally = movie => {
@@ -31,18 +26,13 @@ export function fetchMovie(movie) {
   }
 }
 
-export function postMovie(movie) {
+export function thumbsUp(movie) {
   return async function(dispatch) {
     try {
-      const {result} = await axios.post(`/${movie}`, {
-        movieId: movie.movieId,
-        name: movie.name,
-        thumbsUp: 0,
-        thumbsDown: 0
+      const result = await axios.put('/api/movies/:movie', {
+        name: movie.name
       })
-      if (result.status === 200) {
-        dispatch(addMovie(result.data))
-      }
+      dispatch(updateTally(result.data))
       console.log(result, 'this is the result from the thunk')
     } catch (err) {
       console.error(err)
@@ -50,25 +40,9 @@ export function postMovie(movie) {
   }
 }
 
-// export function thumbsUp(movie) {
-//   return async function (dispatch) {
-//     try {
-//       const result = await axios.put('/api/search/:movie', {
-//         name: movie.name,
-//       })
-//       dispatch(updateTally(result.data))
-//       console.log(result, 'this is the result from the thunk')
-//     } catch (err) {
-//       console.error(err)
-//     }
-//   }
-// }
-
 export default function(state = [], action) {
   switch (action.type) {
     case GET_MOVIE:
-      return action.movie
-    case ADD_MOVIE:
       return action.movie
     default:
       return state

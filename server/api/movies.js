@@ -21,12 +21,21 @@ router.get('/:movie', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
-  console.log('are we hitting the post route?')
+//Upvote
+router.put('/:movie/upvote', async (req, res, next) => {
+  console.log('are we hitting this put route?')
   try {
-    const newMovie = await Movie.create(req.body)
-    res.status(201).send(newMovie)
-    console.log(newMovie, 'the newMovie route works!')
+    const movieToUpdate = await Movie.findOne({
+      where: {
+        name: req.params.movie
+      }
+    })
+    console.log(movieToUpdate, 'what is in newvalue')
+    const incrementResult = await movieToUpdate.increment('thumbsUp', {
+      by: 1
+    })
+    console.log(movieToUpdate, 'what is in newvalue')
+    res.status(201).send(incrementResult)
   } catch (err) {
     next(err)
   }

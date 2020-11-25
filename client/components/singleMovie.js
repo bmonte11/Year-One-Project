@@ -18,11 +18,8 @@ class SingleMovie extends React.Component {
     super(props)
     this.state = {
       movie: {}
-      // thumbsUp: 0,
-      // thumbsDown: 0,
     }
-    // this.onDownvote = this.onDownvote.bind(this)
-    // this.onUpvote = this.onUpvote.bind(this)
+    this.downVote = this.downVote.bind(this)
     this.upVote = this.upVote.bind(this)
   }
   async componentDidMount() {
@@ -36,8 +33,6 @@ class SingleMovie extends React.Component {
       console.log(response.data, 'response in singleMovie component did mount')
       this.setState({
         movie: response.data
-        // thumbsUp: this.props.film[0].thumbsUp,
-        // thumbsDown: this.props.film[0].thumbsDown,
       })
     } catch (error) {
       console.log('error')
@@ -49,7 +44,16 @@ class SingleMovie extends React.Component {
       await axios.put(`/api/movies/${this.props.match.params.movie}/upvote`)
       console.log('it clicked')
       this.props.fetchMovie(this.props.match.params.movie)
-      // this.setState({thumbsUp: this.props.film[0].thumbsUp})
+    } catch (err) {
+      console.log('error in the onClick')
+    }
+  }
+
+  async downVote() {
+    try {
+      await axios.put(`/api/movies/${this.props.match.params.movie}/downvote`)
+      console.log('it clicked')
+      this.props.fetchMovie(this.props.match.params.movie)
     } catch (err) {
       console.log('error in the onClick')
     }
@@ -70,17 +74,15 @@ class SingleMovie extends React.Component {
             <h2>Title</h2>
             {this.state.movie.title}
             <img src={this.state.movie.poster} />
-            {/* {/* <button type="button" onClick={this.onUpvote}>
-              Vote Up
-            </button> */}
-            {/* <button type="button" onClick={this.onClick}>
-              Test
-            </button> */}
             <button type="button" className="thumbs-up" onClick={this.upVote}>
-              Thumbs Up{this.props.film[0].thumbsUp}
+              Thumbs Up {this.props.film[0].thumbsUp}
             </button>
-            <button type="button" className="thumbs-down">
-              Thumbs Down{this.state.thumbsDown}
+            <button
+              type="button"
+              className="thumbs-down"
+              onClick={this.downVote}
+            >
+              Thumbs Down {this.props.film[0].thumbsDown}
             </button>
           </div>
         </div>

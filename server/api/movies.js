@@ -40,3 +40,20 @@ router.put('/:movie/upvote', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:movie/downvote', async (req, res, next) => {
+  console.log('are we hitting this put route?')
+  try {
+    const movieToUpdate = await Movie.findOne({
+      where: {
+        name: req.params.movie
+      }
+    })
+    const decrementResult = await movieToUpdate.increment('thumbsDown', {
+      by: 1
+    })
+    res.status(201).send(decrementResult)
+  } catch (err) {
+    next(err)
+  }
+})

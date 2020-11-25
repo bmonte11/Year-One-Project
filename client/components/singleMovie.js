@@ -3,6 +3,8 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {fetchMovie} from '../store/movies'
+import {FaThumbsUp, FaThumbsDown} from 'react-icons/fa'
+import ReactPlayer from 'react-player'
 
 const options = {
   method: 'GET',
@@ -61,32 +63,41 @@ class SingleMovie extends React.Component {
 
   render() {
     console.log(this.props.film, 'are we getting the state?')
-    if (this.props.film.length === 0) {
-      return (
-        <div>
-          <span>Loading...</span>
-        </div>
-      )
-    } else
-      return (
-        <div>
-          <div className="header">
-            <h2>Title</h2>
-            {this.state.movie.title}
-            <img src={this.state.movie.poster} />
-            <button type="button" className="thumbs-up" onClick={this.upVote}>
-              Thumbs Up {this.props.film[0].thumbsUp}
-            </button>
-            <button
-              type="button"
-              className="thumbs-down"
-              onClick={this.downVote}
-            >
-              Thumbs Down {this.props.film[0].thumbsDown}
-            </button>
+    return (
+      <div className="single-movie">
+        {!this.state.movie.title ? (
+          <div>
+            <span>Loading...</span>
           </div>
-        </div>
-      )
+        ) : (
+          <div>
+            <div className="header">
+              {this.state.movie.title}
+              <img src={this.state.movie.poster} />
+            </div>
+            <div className="details">
+              <div>Description: {this.state.movie.plot}</div>
+              <div>Release Year: {this.state.movie.year}</div>
+              {/* <ReactPlayer url={this.state.movie.trailer.link} /> */}
+            </div>
+            <div className="thumb-area">
+              <FaThumbsUp
+                className="thumb"
+                // value={{color: 'blue', className: 'thumb'}}
+                onClick={this.upVote}
+              />
+              {this.props.film[0].thumbsUp}
+              <FaThumbsDown
+                className="thumb"
+                // value={{color: 'blue', className: 'thumb'}}
+                onClick={this.downVote}
+              />
+              {this.props.film[0].thumbsDown}
+            </div>
+          </div>
+        )}
+      </div>
+    )
   }
 }
 

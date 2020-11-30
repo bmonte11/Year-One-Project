@@ -4,16 +4,6 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {fetchMovie} from '../store/movies'
 import {FaThumbsUp, FaThumbsDown} from 'react-icons/fa'
-import ReactPlayer from 'react-player'
-
-// const options = {
-//   method: 'GET',
-//   url: 'https://imdb-internet-movie-database-unofficial.p.rapidapi.com/film/',
-//   headers: {
-//     'x-rapidapi-key': 'fd7b15974cmsh8a07e9234699e3cp16b971jsnd504ba3dbbbb',
-//     'x-rapidapi-host': 'imdb-internet-movie-database-unofficial.p.rapidapi.com'
-//   }
-// }
 
 const options = {
   method: 'GET',
@@ -29,10 +19,12 @@ class SingleMovie extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      movie: {}
+      movie: {},
+      voted: false
     }
     this.downVote = this.downVote.bind(this)
     this.upVote = this.upVote.bind(this)
+    this.back = this.back.bind(this)
   }
   async componentDidMount() {
     this.props.fetchMovie(this.props.match.params.movie)
@@ -49,43 +41,55 @@ class SingleMovie extends React.Component {
   }
 
   async upVote() {
-    try {
-      await axios.put(`/api/movies/${this.props.match.params.movie}/upvote`)
-      console.log('it clicked')
-      this.props.fetchMovie(this.props.match.params.movie)
-    } catch (err) {
-      console.log('error in the onClick')
+    if (this.state.voted === false) {
+      try {
+        await axios.put(`/api/movies/${this.props.match.params.movie}/upvote`)
+        this.setState({voted: true})
+        this.props.fetchMovie(this.props.match.params.movie)
+      } catch (err) {
+        console.log('error in the onClick')
+      }
     }
   }
 
   async downVote() {
-    try {
-      await axios.put(`/api/movies/${this.props.match.params.movie}/downvote`)
-      console.log('it clicked')
-      this.props.fetchMovie(this.props.match.params.movie)
-    } catch (err) {
-      console.log('error in the onClick')
+    if (this.state.voted === false) {
+      try {
+        await axios.put(`/api/movies/${this.props.match.params.movie}/downvote`)
+        this.setState({voted: true})
+        this.props.fetchMovie(this.props.match.params.movie)
+      } catch (err) {
+        console.log('error in the onClick')
+      }
     }
+  }
+
+  back() {
+    this.props.history.goBack()
   }
 
   render() {
     return (
-      <div className="single-movie">
+      <div>
+        <button type="button" className="button icon-left" onClick={this.back}>
+          Back
+        </button>
         {!this.state.movie.Title ? (
           <div>
             <span>Loading...</span>
           </div>
         ) : (
-          <div>
-            <div className="header">
-              {this.state.movie.Title}
-              <img src={this.state.movie.Poster} />
-            </div>
-            <div className="details">
-              <div>Description: {this.state.movie.Plot}</div>
-              <div>Release Year: {this.state.movie.Year}</div>
-              <div>Director: {this.state.movie.Director} </div>
-              {/* <ReactPlayer url={this.state.movie.trailer.link} /> */}
+          <div className="single-movie">
+            <div className="movie-details">
+              <div className="header">
+                <h2>{this.state.movie.Title}</h2>
+                <img src={this.state.movie.Poster} />
+              </div>
+              <div className="details">
+                <div>Description: {this.state.movie.Plot}</div>
+                <div>Release Year: {this.state.movie.Year}</div>
+                <div>Director: {this.state.movie.Director} </div>
+              </div>
             </div>
             <div className="thumb-area">
               <FaThumbsUp

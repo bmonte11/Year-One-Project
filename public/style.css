@@ -10,9 +10,11 @@ label {
   display: block;
 }
 
-nav a {
-  display: inline-block;
-  margin: 1em;
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  background-color: darkslategrey;
 }
 
 form div {
@@ -24,11 +26,42 @@ form div {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: gray;
+  border-radius: 1%;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.single-movie {
+  display: flex;
+  background-color: lightgray;
+
+  flex-direction: column;
+}
+
+.movie-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 img {
-  width: 50%;
-  height: 50%;
+  width: fit-content;
+  height: fit-content;
+}
+
+button:hover {
+  cursor: pointer;
+  transition-duration: 0.5s;
+  background-color: slategray;
 }
 
 .header {
@@ -37,9 +70,16 @@ img {
   justify-content: center;
 }
 
+.thumb-area {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
 .thumb {
-  /* background-color: powderblue; */
-  transition: background-color 0.5s;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .thumb:hover {

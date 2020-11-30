@@ -6,12 +6,22 @@ import {fetchMovie} from '../store/movies'
 import {FaThumbsUp, FaThumbsDown} from 'react-icons/fa'
 import ReactPlayer from 'react-player'
 
+// const options = {
+//   method: 'GET',
+//   url: 'https://imdb-internet-movie-database-unofficial.p.rapidapi.com/film/',
+//   headers: {
+//     'x-rapidapi-key': 'fd7b15974cmsh8a07e9234699e3cp16b971jsnd504ba3dbbbb',
+//     'x-rapidapi-host': 'imdb-internet-movie-database-unofficial.p.rapidapi.com'
+//   }
+// }
+
 const options = {
   method: 'GET',
-  url: 'https://imdb-internet-movie-database-unofficial.p.rapidapi.com/film/',
+  url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
+  params: {i: 'tt4154796', r: 'json'},
   headers: {
     'x-rapidapi-key': 'fd7b15974cmsh8a07e9234699e3cp16b971jsnd504ba3dbbbb',
-    'x-rapidapi-host': 'imdb-internet-movie-database-unofficial.p.rapidapi.com'
+    'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com'
   }
 }
 
@@ -26,10 +36,7 @@ class SingleMovie extends React.Component {
   }
   async componentDidMount() {
     this.props.fetchMovie(this.props.match.params.movie)
-    // console.log(this.props)
-    options.url = `https://imdb-internet-movie-database-unofficial.p.rapidapi.com/film/${
-      this.props.match.params.movie
-    }`
+    options.params.i = this.props.match.params.id
     let response = await axios.request(options)
     try {
       console.log(response.data, 'response in singleMovie component did mount')
@@ -62,22 +69,22 @@ class SingleMovie extends React.Component {
   }
 
   render() {
-    console.log(this.props.film, 'are we getting the state?')
     return (
       <div className="single-movie">
-        {!this.state.movie.title ? (
+        {!this.state.movie.Title ? (
           <div>
             <span>Loading...</span>
           </div>
         ) : (
           <div>
             <div className="header">
-              {this.state.movie.title}
-              <img src={this.state.movie.poster} />
+              {this.state.movie.Title}
+              <img src={this.state.movie.Poster} />
             </div>
             <div className="details">
-              <div>Description: {this.state.movie.plot}</div>
-              <div>Release Year: {this.state.movie.year}</div>
+              <div>Description: {this.state.movie.Plot}</div>
+              <div>Release Year: {this.state.movie.Year}</div>
+              <div>Director: {this.state.movie.Director} </div>
               {/* <ReactPlayer url={this.state.movie.trailer.link} /> */}
             </div>
             <div className="thumb-area">

@@ -89,7 +89,7 @@ class SingleMovie extends React.Component {
     const film = this.props.film[0]
     console.log(film, 'singleMovie film')
     return (
-      <div>
+      <div className="page">
         <button type="button" className="button icon-left" onClick={this.back}>
           Back
         </button>

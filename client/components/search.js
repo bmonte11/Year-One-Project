@@ -40,7 +40,7 @@ class Movies extends React.Component {
   render() {
     const movies = this.props.film
     return (
-      <div>
+      <div className="page">
         <form>
           <input
             type="text"

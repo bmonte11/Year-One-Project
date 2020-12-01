@@ -14,12 +14,18 @@ class MovieList extends React.Component {
             <div className="movie-info" key={movie.imdbID}>
               <Link to={destination}>
                 {' '}
-                <div>{movie.Title}</div>{' '}
+                <div className="title">{movie.Title}</div>{' '}
               </Link>
               {/* <div>{movie.Source.Director}</div> */}
               <div>{movie.Year}</div>
               {/* <div>{movie.Source.Plot}</div> */}
-              <img src={movie.Poster} />
+              <img
+                src={
+                  movie.Poster === 'N/A'
+                    ? 'https://www.2queue.com/2queue/wp-content/uploads/sites/6/tdomf/4299/movie-poster-coming-soon.png'
+                    : movie.Poster
+                }
+              />
             </div>
           )
         })}

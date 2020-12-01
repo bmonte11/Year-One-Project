@@ -10,6 +10,11 @@ label {
   display: block;
 }
 
+.page {
+  margin: 1rem;
+  padding: 2rem;
+}
+
 .nav-bar {
   display: flex;
   flex-direction: column;
@@ -55,7 +60,13 @@ form div {
 
 img {
   width: fit-content;
+  max-width: 300px;
   height: fit-content;
+}
+
+.title {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 button:hover {

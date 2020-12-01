@@ -1,6 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import MovieList from './listMovies'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
+import {searchMovies} from '../store/movies'
 
 const options = {
   method: 'GET',
@@ -12,13 +15,11 @@ const options = {
   }
 }
 
-export default class Movies extends React.Component {
+class Movies extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      input: '',
-      clicked: false,
-      movie: {}
+      input: ''
     }
     this.myChangeHandler = this.myChangeHandler.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -27,20 +28,17 @@ export default class Movies extends React.Component {
     this.setState({input: event.target.value})
   }
 
-  async onSubmit(event) {
+  onSubmit(event) {
     event.preventDefault()
-    // options.params = {Title: this.state.input, ProgramTypes: 'Movie'}
-    options.params.s = this.state.input
-    let response = await axios.request(options)
     try {
-      console.log(response.data, 'response in onSubmit')
-      this.setState({movie: response.data, clicked: true})
-    } catch (error) {
-      console.log('error')
+      this.props.searchMovies(this.state.input)
+      // this.props.history.push(`${this.state.input}`)
+    } catch (err) {
+      console.log(err)
     }
   }
   render() {
-    const movies = this.state.movie.Search
+    const movies = this.props.film
     return (
       <div>
         <form>
@@ -53,9 +51,23 @@ export default class Movies extends React.Component {
           <button type="submit" onClick={this.onSubmit}>
             Search
           </button>
-          {this.state.clicked && <MovieList movies={movies} key={movies.id} />}
+          {movies && <MovieList movies={movies} key={movies.imdbID} />}
         </form>
       </div>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    film: state.movies
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    searchMovies: input => dispatch(searchMovies(input))
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Movies))

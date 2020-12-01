@@ -1,9 +1,10 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
 
-export default class MovieList extends React.Component {
+class MovieList extends React.Component {
   render() {
-    let movies = this.props.movies
+    let movies = this.props.film
     return (
       <div className="movie-list">
         {movies.map(movie => {
@@ -25,3 +26,11 @@ export default class MovieList extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    film: state.movies
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(MovieList))

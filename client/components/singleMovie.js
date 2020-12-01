@@ -95,7 +95,7 @@ class SingleMovie extends React.Component {
         </button>
         {!film ? (
           <div>
-            <span>Loading...</span>
+            <span className="loader">Loading...</span>
           </div>
         ) : (
           <div className="single-movie">

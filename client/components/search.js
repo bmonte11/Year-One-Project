@@ -51,7 +51,7 @@ class Movies extends React.Component {
           <button type="submit" onClick={this.onSubmit}>
             Search
           </button>
-          {movies && <MovieList movies={movies} key={movies.imdbID} />}
+          {movies !== {} && <MovieList movies={movies} key={movies.imdbID} />}
         </form>
       </div>
     )
@@ -60,7 +60,7 @@ class Movies extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    film: state.movies
+    film: state.movies.movies
   }
 }
 

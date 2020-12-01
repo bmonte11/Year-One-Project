@@ -16,31 +16,52 @@ router.get('/search/:input', async (req, res, next) => {
   let response = await axios.request(options)
   try {
     res.send(response.data.Search)
-    console.log(response.data.Search, "here's the response from the new route")
   } catch (err) {
     next(err)
   }
 })
 
-router.get('/:movie', async (req, res, next) => {
+// router.get('/:movie/:id', async (req, res, next) => {
+//   try {
+//     res.send(response.data)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
+router.get('/:movie/:id', async (req, res, next) => {
+  const options = {
+    url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
+    params: {i: req.params.id, r: 'json'},
+    headers: {
+      'x-rapidapi-key': 'fd7b15974cmsh8a07e9234699e3cp16b971jsnd504ba3dbbbb',
+      'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com'
+    }
+  }
+  let response = await axios.request(options)
   try {
     const movie = await Movie.findOrCreate({
       where: {
         name: req.params.movie
       },
       defaults: {
+        director: response.data.Director,
+        releaseYear: response.data.Year,
+        description: response.data.Plot,
+        poster: response.data.Poster,
         thumbsUp: 0,
         thumbsDown: 0
       }
     })
     res.send(movie)
+    // res.send(response.data)
   } catch (err) {
     next(err)
   }
 })
 
 //Upvote
-router.put('/:movie/upvote', async (req, res, next) => {
+router.put('/:movie/:id/upvote', async (req, res, next) => {
   try {
     const movieToUpdate = await Movie.findOne({
       where: {
@@ -56,7 +77,8 @@ router.put('/:movie/upvote', async (req, res, next) => {
   }
 })
 
-router.put('/:movie/downvote', async (req, res, next) => {
+//Downvote
+router.put('/:movie/:id/downvote', async (req, res, next) => {
   try {
     const movieToUpdate = await Movie.findOne({
       where: {

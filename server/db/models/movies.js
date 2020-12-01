@@ -16,6 +16,9 @@ const Movie = db.define('movie', {
   description: {
     type: Sequelize.TEXT
   },
+  poster: {
+    type: Sequelize.STRING
+  },
   thumbsUp: {
     type: Sequelize.INTEGER
   },

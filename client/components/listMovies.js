@@ -4,7 +4,8 @@ import {connect} from 'react-redux'
 
 class MovieList extends React.Component {
   render() {
-    let movies = this.props.film
+    let movies = this.props.film.movies
+    console.log(movies, 'listMovies')
     return (
       <div className="movie-list">
         {movies.map(movie => {

@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const GET_MOVIES = 'GET_MOVIES'
 const SET_MOVIE = 'SET_MOVIE'
+const VOTE = 'VOTE'
 
 //Initial State
 
@@ -18,6 +19,13 @@ export const setMovie = movie => {
   }
 }
 
+export const voteMovie = movie => {
+  return {
+    type: VOTE,
+    movie
+  }
+}
+
 export function fetchMovie(movie, id) {
   return async function(dispatch) {
     try {
@@ -29,16 +37,27 @@ export function fetchMovie(movie, id) {
   }
 }
 
-// export function mountMovie(movie){
-//   return async function (dispatch) {
-//     try {
-//       const result = await axios.get(`/api/movies/${movie}`)
-//       dispatch(setMovie(result.data))
-//     } catch (err) {
-//       console.log(err)
-//     }
-//   }
-// }
+export function upVote(movie, id) {
+  return async function(dispatch) {
+    try {
+      const result = await axios.put(`/api/movies/${movie}/${id}/upvote`)
+      dispatch(voteMovie(result.data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+export function downVote(movie, id) {
+  return async function(dispatch) {
+    try {
+      const result = await axios.put(`/api/movies/${movie}/${id}/downvote`)
+      dispatch(voteMovie(result.data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
 
 export function searchMovies(input) {
   return async function(dispatch) {
@@ -57,6 +76,8 @@ export default function(state = defaultMovie, action) {
       return {...state, film: {...action.movie}}
     case GET_MOVIES:
       return {...state, movies: [...action.movies]}
+    case VOTE:
+      return {...state, film: {...action.movie}}
     default:
       return state
   }

@@ -2,18 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import {fetchMovie} from '../store/movies'
+import {fetchMovie, upVote, downVote} from '../store/movies'
 import {FaThumbsUp, FaThumbsDown} from 'react-icons/fa'
-
-// const options = {
-//   method: 'GET',
-//   url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
-//   params: {i: 'tt4154796', r: 'json'},
-//   headers: {
-//     'x-rapidapi-key': 'fd7b15974cmsh8a07e9234699e3cp16b971jsnd504ba3dbbbb',
-//     'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com',
-//   },
-// }
+import e from 'express'
 
 class SingleMovie extends React.Component {
   constructor(props) {
@@ -31,53 +22,33 @@ class SingleMovie extends React.Component {
       this.props.match.params.movie,
       this.props.match.params.id
     )
-    //   options.params.i = this.props.match.params.id
-    //   let response = await axios.request(options)
-    //   try {
-    //     console.log(response.data, 'response in singleMovie component did mount')
-    //     this.setState({
-    //       movie: response.data,
-    //     })
-    //   } catch (error) {
-    //     console.log('error')
-    //   }
   }
 
-  async upVote() {
+  upVote() {
     if (this.state.voted === false) {
-      try {
-        await axios.put(
-          `/api/movies/${this.props.match.params.movie}/${
-            this.props.match.params.id
-          }/upvote`
-        )
-        this.setState({voted: true})
-        this.props.fetchMovie(
-          this.props.match.params.movie,
-          this.props.match.params.id
-        )
-      } catch (err) {
-        console.log('error in the onClick')
-      }
+      this.props.upVote(
+        this.props.match.params.movie,
+        this.props.match.params.id
+      )
+      this.setState({voted: true})
+      // this.props.fetchMovie(
+      //   this.props.match.params.movie,
+      //   this.props.match.params.id
+      // )
     }
   }
 
-  async downVote() {
+  downVote() {
     if (this.state.voted === false) {
-      try {
-        await axios.put(
-          `/api/movies/${this.props.match.params.movie}/${
-            this.props.match.params.id
-          }/downvote`
-        )
-        this.setState({voted: true})
-        this.props.fetchMovie(
-          this.props.match.params.movie,
-          this.props.match.params.id
-        )
-      } catch (err) {
-        console.log('error in the onClick')
-      }
+      this.props.downVote(
+        this.props.match.params.movie,
+        this.props.match.params.id
+      )
+      this.setState({voted: true})
+      // this.props.fetchMovie(
+      //   this.props.match.params.movie,
+      //   this.props.match.params.id
+      // )
     }
   }
 
@@ -87,13 +58,12 @@ class SingleMovie extends React.Component {
 
   render() {
     const film = this.props.film[0]
-    console.log(film, 'singleMovie film')
     return (
       <div className="page">
         <button type="button" className="button icon-left" onClick={this.back}>
           Back
         </button>
-        {!film ? (
+        {!film.id ? (
           <div>
             <span className="loader">Loading...</span>
           </div>
@@ -102,7 +72,13 @@ class SingleMovie extends React.Component {
             <div className="movie-details">
               <div className="header">
                 <h2>{film.name}</h2>
-                <img src={film.poster} />
+                <img
+                  src={
+                    film.poster === 'N/A'
+                      ? 'https://www.2queue.com/2queue/wp-content/uploads/sites/6/tdomf/4299/movie-poster-coming-soon.png'
+                      : film.poster
+                  }
+                />
               </div>
               <div className="details">
                 <div>Description: {film.description}</div>
@@ -139,7 +115,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchMovie: (movie, id) => dispatch(fetchMovie(movie, id))
+    fetchMovie: (movie, id) => dispatch(fetchMovie(movie, id)),
+    upVote: (movie, id) => dispatch(upVote(movie, id)),
+    downVote: (movie, id) => dispatch(downVote(movie, id))
   }
 }
 

@@ -7,7 +7,7 @@ import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div className="nav-bar">
     <h1>iSearchMovies</h1>
-    <span>A hub for all of your favorite movies!</span>
+    <h5>A hub for all of your favorite movies!</h5>
     <nav>
       <Link to="/search">Search</Link>
     </nav>

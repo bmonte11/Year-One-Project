@@ -8,8 +8,9 @@ class SingleMovie extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      movie: {},
-      voted: false
+      voted: false,
+      upColor: 'currentColor',
+      downColor: 'currentColor'
     }
     this.downVote = this.downVote.bind(this)
     this.upVote = this.upVote.bind(this)
@@ -28,7 +29,7 @@ class SingleMovie extends React.Component {
         this.props.match.params.movie,
         this.props.match.params.id
       )
-      this.setState({voted: true})
+      this.setState({voted: true, upColor: 'blue'})
     }
   }
 
@@ -38,7 +39,7 @@ class SingleMovie extends React.Component {
         this.props.match.params.movie,
         this.props.match.params.id
       )
-      this.setState({voted: true})
+      this.setState({voted: true, downColor: 'blue'})
     }
   }
 
@@ -50,7 +51,7 @@ class SingleMovie extends React.Component {
     const film = this.props.film[0]
     return (
       <div className="page">
-        <button type="button" className="button icon-left" onClick={this.back}>
+        <button type="button" className="button-icon-left" onClick={this.back}>
           Back
         </button>
         {!film ? (
@@ -77,27 +78,35 @@ class SingleMovie extends React.Component {
                   </div>
                   <div className="details">
                     <div className="upper-details">
-                      <h4>{film.runTime}</h4>
-                      <h4> {film.releaseYear}</h4>
+                      <h4>Runtime: {film.runTime}</h4>
+                      <h4> ({film.releaseYear})</h4>
                     </div>
                     <div className="lower-details">
                       <span>{film.description}</span>
-                      <h4>{film.genre}</h4>
-                      <h4>{film.rating}</h4>
+                      <div className="genre-rating">
+                        <h4>{film.genre}</h4>
+                        <h4>Rated {film.rating}</h4>
+                      </div>
                     </div>
                     <div className="thumb-area">
-                      <FaThumbsUp
-                        className="thumb"
-                        // value={{color: 'blue', className: 'thumb'}}
-                        onClick={this.upVote}
-                      />
-                      {film.thumbsUp}
-                      <FaThumbsDown
-                        className="thumb"
-                        // value={{color: 'blue', className: 'thumb'}}
-                        onClick={this.downVote}
-                      />
-                      {film.thumbsDown}
+                      <div className="thumbs-up">
+                        <FaThumbsUp
+                          size="25px"
+                          color={this.state.upColor}
+                          className="thumb"
+                          onClick={this.upVote}
+                        />
+                        {film.thumbsUp}
+                      </div>
+                      <div className="thumbs-down">
+                        <FaThumbsDown
+                          size="25px"
+                          color={this.state.downColor}
+                          className="thumb"
+                          onClick={this.downVote}
+                        />
+                        {film.thumbsDown}
+                      </div>
                     </div>
                   </div>
                 </div>

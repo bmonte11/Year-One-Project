@@ -31,7 +31,6 @@ router.get('/:movie/:id', async (req, res, next) => {
     }
   }
   let response = await axios.request(options)
-  console.log(response.data, 'what else can we here')
   try {
     const movie = await Movie.findOrCreate({
       where: {

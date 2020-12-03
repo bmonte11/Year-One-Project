@@ -14,13 +14,30 @@ label {
 .page {
   margin: 1rem;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.button-icon-left {
+  width: fit-content;
+  height: fit-content;
+  margin-bottom: 2rem;
 }
 
 .nav-bar {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
-  background-color: darkslategrey;
+  background-color: darkblue;
+}
+
+.nav-bar h1,
+h5,
+nav {
+  display: flex;
+  color: white;
+  justify-content: center;
 }
 
 form div {
@@ -53,6 +70,7 @@ form div {
   display: flex;
   background-color: lightgray;
   flex-direction: column;
+  max-width: 1000px;
 }
 
 .single-movie-card {
@@ -62,9 +80,36 @@ form div {
 
 .single-movie-card img {
   max-height: fit-content;
+  margin-right: 2rem;
+}
+
+.right-side {
+  padding: 2rem;
+}
+
+.header h2,
+h4 {
+  display: flex;
+  justify-content: center;
 }
 
 .upper-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.lower-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.lower-details span,
+h4 {
+  padding: 1rem;
+}
+
+.genre-rating {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -97,6 +142,11 @@ img {
 .search-input {
   display: flex;
   justify-content: center;
+  margin: 2rem;
+}
+
+.search-input button {
+  margin-left: 1rem;
 }
 
 .title {
@@ -130,8 +180,6 @@ button:hover {
 }
 
 .thumb-area {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
   display: flex;
   justify-content: center;
 }
@@ -139,6 +187,11 @@ button:hover {
 .thumb {
   margin-left: 1rem;
   margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.thumb:after {
+  color: blue;
 }
 
 .thumb:hover {

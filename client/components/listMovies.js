@@ -10,9 +10,9 @@ class MovieList extends React.Component {
         {movies.map(movie => {
           let destination = `/${movie.Title}/${movie.imdbID}`
           return (
-            <div className="movie-info" key={movie.imdbID}>
-              {' '}
-              <Link to={destination}>
+            <Link to={destination} key={movie.imdbID}>
+              <div className="movie-info">
+                {' '}
                 <img
                   className="poster"
                   src={
@@ -21,14 +21,14 @@ class MovieList extends React.Component {
                       : movie.Poster
                   }
                 />
-              </Link>
-              <div className="card-info">
-                <h3 className="title">{movie.Title}</h3>{' '}
-                {/* <div>{movie.Source.Director}</div> */}
-                <h4 className="year">{movie.Year}</h4>
-                {/* <div>{movie.Source.Plot}</div> */}
+                <div className="card-info">
+                  <h3 className="title">{movie.Title}</h3>{' '}
+                  {/* <div>{movie.Source.Director}</div> */}
+                  <h4 className="year">{movie.Year}</h4>
+                  {/* <div>{movie.Source.Plot}</div> */}
+                </div>
               </div>
-            </div>
+            </Link>
           )
         })}
       </div>

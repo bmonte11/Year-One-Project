@@ -2,11 +2,10 @@ Welcome to iSearchMovies! A simple movie search page.
 
 Just type in the movie you'd like to search for and you can click through and learn more about it!
 
-To get started, run the following commands in the terminal:
+To get started, make sure Postgresql is installed on your machine: https://www.postgresql.org/download/
+
+Then run the following commands in the terminal:
 
 -npm install
--npm install postgres
-
-  <!-- create database "yearOne" -->
-
+-createdb yearOne
 -npm run start-dev

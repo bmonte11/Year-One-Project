@@ -19,6 +19,18 @@ const Movie = db.define('movie', {
   poster: {
     type: Sequelize.STRING
   },
+  rating: {
+    type: Sequelize.STRING
+  },
+  runTime: {
+    type: Sequelize.STRING
+  },
+  genre: {
+    type: Sequelize.STRING
+  },
+  metaScore: {
+    type: Sequelize.INTEGER
+  },
   thumbsUp: {
     type: Sequelize.INTEGER
   },

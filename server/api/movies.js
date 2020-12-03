@@ -21,14 +21,6 @@ router.get('/search/:input', async (req, res, next) => {
   }
 })
 
-// router.get('/:movie/:id', async (req, res, next) => {
-//   try {
-//     res.send(response.data)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
 router.get('/:movie/:id', async (req, res, next) => {
   const options = {
     url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
@@ -39,6 +31,7 @@ router.get('/:movie/:id', async (req, res, next) => {
     }
   }
   let response = await axios.request(options)
+  console.log(response.data, 'what else can we here')
   try {
     const movie = await Movie.findOrCreate({
       where: {
@@ -49,6 +42,10 @@ router.get('/:movie/:id', async (req, res, next) => {
         releaseYear: response.data.Year,
         description: response.data.Plot,
         poster: response.data.Poster,
+        rating: response.data.Rated,
+        runTime: response.data.Runtime,
+        genre: response.data.Genre,
+        metaScore: response.data.Metascore,
         thumbsUp: 0,
         thumbsDown: 0
       }

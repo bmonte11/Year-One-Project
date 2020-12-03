@@ -60,35 +60,48 @@ class SingleMovie extends React.Component {
         ) : (
           <div className="single-movie">
             <div className="movie-details">
-              <div className="header">
-                <h2>{film.name}</h2>
-                <img
-                  src={
-                    film.poster === 'N/A'
-                      ? 'https://www.2queue.com/2queue/wp-content/uploads/sites/6/tdomf/4299/movie-poster-coming-soon.png'
-                      : film.poster
-                  }
-                />
+              <div className="single-movie-card">
+                <div className="left-side">
+                  <img
+                    src={
+                      film.poster === 'N/A'
+                        ? 'https://www.2queue.com/2queue/wp-content/uploads/sites/6/tdomf/4299/movie-poster-coming-soon.png'
+                        : film.poster
+                    }
+                  />
+                </div>
+                <div className="right-side">
+                  <div className="header">
+                    <h2>{film.name}</h2>
+                    <h4>Dir: {film.director} </h4>
+                  </div>
+                  <div className="details">
+                    <div className="upper-details">
+                      <h4>{film.runTime}</h4>
+                      <h4> {film.releaseYear}</h4>
+                    </div>
+                    <div className="lower-details">
+                      <span>{film.description}</span>
+                      <h4>{film.genre}</h4>
+                      <h4>{film.rating}</h4>
+                    </div>
+                    <div className="thumb-area">
+                      <FaThumbsUp
+                        className="thumb"
+                        // value={{color: 'blue', className: 'thumb'}}
+                        onClick={this.upVote}
+                      />
+                      {film.thumbsUp}
+                      <FaThumbsDown
+                        className="thumb"
+                        // value={{color: 'blue', className: 'thumb'}}
+                        onClick={this.downVote}
+                      />
+                      {film.thumbsDown}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="details">
-                <div>Description: {film.description}</div>
-                <div>Release Year: {film.releaseYear}</div>
-                <div>Director: {film.director} </div>
-              </div>
-            </div>
-            <div className="thumb-area">
-              <FaThumbsUp
-                className="thumb"
-                // value={{color: 'blue', className: 'thumb'}}
-                onClick={this.upVote}
-              />
-              {film.thumbsUp}
-              <FaThumbsDown
-                className="thumb"
-                // value={{color: 'blue', className: 'thumb'}}
-                onClick={this.downVote}
-              />
-              {film.thumbsDown}
             </div>
           </div>
         )}

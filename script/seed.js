@@ -13,9 +13,7 @@ async function seed() {
   ])
 
   const movies = await Promise.all([
-    Movie.create({name: 'Gladiator', thumbsUp: 0, thumbsDown: 0}),
-    Movie.create({name: 'Toy Story', thumbsUp: 43, thumbsDown: 22}),
-    Movie.create({name: 'Forrest Gump', thumbsUp: 0, thumbsDown: 0})
+    Movie.create({name: 'Gladiator', thumbsUp: 0, thumbsDown: 0})
   ])
 
   console.log(`seeded ${users.length} users`)

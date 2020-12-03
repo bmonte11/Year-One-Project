@@ -52,13 +52,27 @@ form div {
 .single-movie {
   display: flex;
   background-color: lightgray;
-
   flex-direction: column;
+}
+
+.single-movie-card {
+  display: flex;
+  flex-direction: row;
+}
+
+.single-movie-card img {
+  max-height: fit-content;
+}
+
+.upper-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .movie-details {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .details {

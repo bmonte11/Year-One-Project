@@ -30,15 +30,23 @@ form div {
 
 .movie-info {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   background-color: gray;
-  border-radius: 1%;
+  max-height: 400px;
+  padding: 2rem;
+  margin: 1rem;
+}
+
+.movie-info:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 0px 80px -25px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s;
 }
 
 .movie-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .single-movie {
@@ -62,13 +70,37 @@ form div {
 img {
   width: fit-content;
   max-width: 300px;
-  max-height: 450px;
+  max-height: 350px;
   height: fit-content;
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.search-input {
+  display: flex;
+  justify-content: center;
 }
 
 .title {
   display: flex;
   flex-wrap: wrap;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.year {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.poster {
+  display: flex;
+  justify-content: center;
 }
 
 button:hover {

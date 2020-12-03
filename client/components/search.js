@@ -30,7 +30,7 @@ class Movies extends React.Component {
     const movies = this.props.film
     return (
       <div className="page">
-        <form>
+        <form className="search-input">
           <input
             type="text"
             placeholder="Type in a movie title..."
@@ -40,9 +40,10 @@ class Movies extends React.Component {
           <button type="submit" onClick={this.onSubmit}>
             Search
           </button>
-
-          {movies !== {} && <MovieList movies={movies} key={movies.imdbID} />}
         </form>
+        <div className="movie-list">
+          {movies !== {} && <MovieList movies={movies} key={movies.imdbID} />}
+        </div>
       </div>
     )
   }

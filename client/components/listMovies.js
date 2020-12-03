@@ -11,20 +11,23 @@ class MovieList extends React.Component {
           let destination = `/${movie.Title}/${movie.imdbID}`
           return (
             <div className="movie-info" key={movie.imdbID}>
+              {' '}
               <Link to={destination}>
-                {' '}
-                <div className="title">{movie.Title}</div>{' '}
+                <img
+                  className="poster"
+                  src={
+                    movie.Poster === 'N/A'
+                      ? 'https://www.2queue.com/2queue/wp-content/uploads/sites/6/tdomf/4299/movie-poster-coming-soon.png'
+                      : movie.Poster
+                  }
+                />
               </Link>
-              {/* <div>{movie.Source.Director}</div> */}
-              <div>{movie.Year}</div>
-              {/* <div>{movie.Source.Plot}</div> */}
-              <img
-                src={
-                  movie.Poster === 'N/A'
-                    ? 'https://www.2queue.com/2queue/wp-content/uploads/sites/6/tdomf/4299/movie-poster-coming-soon.png'
-                    : movie.Poster
-                }
-              />
+              <div className="card-info">
+                <h3 className="title">{movie.Title}</h3>{' '}
+                {/* <div>{movie.Source.Director}</div> */}
+                <h4 className="year">{movie.Year}</h4>
+                {/* <div>{movie.Source.Plot}</div> */}
+              </div>
             </div>
           )
         })}

@@ -2,7 +2,7 @@ Welcome to iSearchMovies! A simple movie search page by Brendan Monte
 
 Just type in the movie you'd like to search for and you can click through and learn more about it!
 
-To get started, clone the repo and pull it into your IDE.
+To get started, clone the repo and pull it into your code editor.
 
 Also, make sure Postgresql is installed on your machine: https://www.postgresql.org/download/
 

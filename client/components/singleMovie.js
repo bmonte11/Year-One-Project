@@ -1,10 +1,8 @@
 import React from 'react'
-import axios from 'axios'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {fetchMovie, upVote, downVote} from '../store/movies'
 import {FaThumbsUp, FaThumbsDown} from 'react-icons/fa'
-import e from 'express'
 
 class SingleMovie extends React.Component {
   constructor(props) {
@@ -31,10 +29,6 @@ class SingleMovie extends React.Component {
         this.props.match.params.id
       )
       this.setState({voted: true})
-      // this.props.fetchMovie(
-      //   this.props.match.params.movie,
-      //   this.props.match.params.id
-      // )
     }
   }
 
@@ -45,10 +39,6 @@ class SingleMovie extends React.Component {
         this.props.match.params.id
       )
       this.setState({voted: true})
-      // this.props.fetchMovie(
-      //   this.props.match.params.movie,
-      //   this.props.match.params.id
-      // )
     }
   }
 
@@ -63,7 +53,7 @@ class SingleMovie extends React.Component {
         <button type="button" className="button icon-left" onClick={this.back}>
           Back
         </button>
-        {!film.id ? (
+        {!film ? (
           <div>
             <span className="loader">Loading...</span>
           </div>

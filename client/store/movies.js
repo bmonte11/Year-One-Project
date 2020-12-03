@@ -41,7 +41,9 @@ export function upVote(movie, id) {
   return async function(dispatch) {
     try {
       const result = await axios.put(`/api/movies/${movie}/${id}/upvote`)
+      const film = await axios.get(`/api/movies/${movie}/${id}`)
       dispatch(voteMovie(result.data))
+      dispatch(setMovie(film.data))
     } catch (err) {
       console.log(err)
     }
@@ -52,7 +54,9 @@ export function downVote(movie, id) {
   return async function(dispatch) {
     try {
       const result = await axios.put(`/api/movies/${movie}/${id}/downvote`)
+      const film = await axios.get(`/api/movies/${movie}/${id}`)
       dispatch(voteMovie(result.data))
+      dispatch(setMovie(film.data))
     } catch (err) {
       console.log(err)
     }
